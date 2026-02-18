@@ -40,17 +40,28 @@ revenueInput.addEventListener("input", function(e) {
 
 
 function calcular(){
+
   const respostas = document.querySelectorAll("input[type='radio']:checked");
+
   if(respostas.length < 5){
     alert("Responda todas as perguntas.");
     return;
-    // Mostrar botão WhatsApp após diagnóstico
-document.getElementById("whatsappFloat").classList.remove("hidden");
-
   }
 
   let total = 0;
   respostas.forEach(r => total += parseInt(r.value));
+
+  // 🔥 PEGAR FATURAMENTO FORMATADO
+  let revenueString = document.getElementById("monthlyRevenue").value;
+
+  let revenue = parseFloat(
+      revenueString.replace(/\./g, "").replace(",", ".")
+  ) || 0;
+
+    // Mostrar botão WhatsApp após diagnóstico
+  document.getElementById("whatsappFloat").classList.remove("hidden");
+}
+
 
   // Receita para simular prejuízo
   const revenue = Number(document.getElementById("monthlyRevenue").value) || 0;
