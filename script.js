@@ -1,4 +1,4 @@
-const numero = "5551991338688"; // coloque seu WhatsApp (DDI+DDD+numero)
+const numero = "5551981757073"; // coloque seu WhatsApp (DDI+DDD+numero)
 
 const radios = document.querySelectorAll("input[type='radio']");
 radios.forEach(r => r.addEventListener("change", atualizarProgresso));
