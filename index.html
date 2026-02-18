@@ -1,108 +1,185 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diagnóstico Inteligente | Rodrigo Systems</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico Inteligente | Rodrigo Systems</title>
+
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-<header class="hero">
-  <h1>Diagnóstico Inteligente para Negócios Locais</h1>
-  <p>Descubra em 60 segundos o nível de organização do seu negócio.</p>
-</header>
+  <!-- HERO -->
+  <header class="hero">
+    <h1>Diagnóstico Inteligente para Negócios Locais</h1>
+    <p>Responda em 60 segundos e receba um diagnóstico com plano recomendado e estimativa de prejuízo.</p>
+  </header>
 
-<section class="container">
+  <section class="container">
 
-  <div class="progress-bar">
-    <div class="progress" id="progress"></div>
-  </div>
-
-  <!-- Inputs extras para simulação -->
-  <div class="card-mini">
-    <h3>Para estimar o prejuízo (rápido)</h3>
-    <div class="mini-grid">
-      <label>
-        Faturamento médio por mês (R$)
-        <input type="number" id="monthlyRevenue" value="15000" min="0" step="100">
-      </label>
-
-      <label>
-        Dias de operação no mês
-        <input type="number" id="workDays" value="26" min="0" step="1">
-      </label>
-    </div>
-    <p class="mini-note">
-      Se não souber, deixe aproximado (ex: 15000). Isso aumenta a precisão do diagnóstico.
-    </p>
-  </div>
-
-  <form id="quiz">
-
-    <div class="question">
-      <p>1. Você controla vendas manualmente (papel/planilha)?</p>
-      <label><input type="radio" name="q1" value="2"> Sim</label>
-      <label><input type="radio" name="q1" value="0"> Não</label>
+    <!-- PROGRESSO -->
+    <div class="progress-bar" aria-label="Progresso do diagnóstico">
+      <div class="progress" id="progress"></div>
     </div>
 
-    <div class="question">
-      <p>2. Já perdeu dinheiro por erro, retrabalho ou desorganização?</p>
-      <label><input type="radio" name="q2" value="2"> Sim</label>
-      <label><input type="radio" name="q2" value="0"> Não</label>
-    </div>
+    <!-- MINI CARD: DADOS PARA PREJUÍZO -->
+    <div class="card-mini">
+      <h3>Para estimar o prejuízo (rápido)</h3>
 
-    <div class="question">
-      <p>3. Você sabe exatamente seu lucro mensal?</p>
-      <label><input type="radio" name="q3" value="0"> Sim</label>
-      <label><input type="radio" name="q3" value="2"> Não</label>
-    </div>
+      <div class="mini-grid">
+        <label>
+          Faturamento médio por mês (R$)
+          <input type="number" id="monthlyRevenue" value="15000" min="0" step="100" />
+        </label>
 
-    <div class="question">
-      <p>4. Seu estoque é automatizado?</p>
-      <label><input type="radio" name="q4" value="0"> Sim</label>
-      <label><input type="radio" name="q4" value="2"> Não</label>
-    </div>
-
-    <div class="question">
-      <p>5. Seu negócio está crescendo?</p>
-      <label><input type="radio" name="q5" value="0"> Sim</label>
-      <label><input type="radio" name="q5" value="1"> Um pouco</label>
-      <label><input type="radio" name="q5" value="2"> Não</label>
-    </div>
-
-    <button type="button" onclick="calcular()" class="btn">
-      Gerar Diagnóstico
-    </button>
-  </form>
-
-  <div id="resultado" class="resultado"></div>
-
-  <!-- Depoimentos (aparecem após resultado) -->
-  <div id="depoimentos" class="depoimentos hidden">
-    <h3>O que donos de negócio dizem</h3>
-
-    <div class="testimonials">
-      <div class="t-card">
-        <p>“Depois do sistema, parei de perder pedido e consegui enxergar o lucro do dia.”</p>
-        <span>— Delivery Local</span>
+        <label>
+          Dias de operação no mês
+          <input type="number" id="workDays" value="26" min="0" step="1" />
+        </label>
       </div>
-      <div class="t-card">
-        <p>“O estoque deixou de ser dor de cabeça. Hoje eu compro certo e sobra menos.”</p>
-        <span>— Comércio</span>
-      </div>
-      <div class="t-card">
-        <p>“O painel me mostrou onde eu estava perdendo dinheiro sem perceber.”</p>
-        <span>— Prestador de serviço</span>
-      </div>
+
+      <p class="mini-note">
+        Se não souber, coloque um valor aproximado (ex: 15000). Isso aumenta a precisão da estimativa.
+      </p>
     </div>
 
-    <p class="trust">✅ Diagnóstico gratuito • ✅ Recomendação personalizada • ✅ Sem compromisso</p>
-  </div>
+    <!-- QUIZ -->
+    <form id="quiz" class="quiz" autocomplete="off">
 
-</section>
+      <div class="question">
+        <p>1. Você controla vendas manualmente (papel/planilha)?</p>
+        <label><input type="radio" name="q1" value="2" /> Sim</label>
+        <label><input type="radio" name="q1" value="0" /> Não</label>
+      </div>
 
-<script src="js/script.js"></script>
+      <div class="question">
+        <p>2. Já perdeu dinheiro por erro, retrabalho ou desorganização?</p>
+        <label><input type="radio" name="q2" value="2" /> Sim</label>
+        <label><input type="radio" name="q2" value="0" /> Não</label>
+      </div>
+
+      <div class="question">
+        <p>3. Você sabe exatamente seu lucro mensal?</p>
+        <label><input type="radio" name="q3" value="0" /> Sim</label>
+        <label><input type="radio" name="q3" value="2" /> Não</label>
+      </div>
+
+      <div class="question">
+        <p>4. Seu estoque é automatizado?</p>
+        <label><input type="radio" name="q4" value="0" /> Sim</label>
+        <label><input type="radio" name="q4" value="2" /> Não</label>
+      </div>
+
+      <div class="question">
+        <p>5. Seu negócio está crescendo?</p>
+        <label><input type="radio" name="q5" value="0" /> Sim</label>
+        <label><input type="radio" name="q5" value="1" /> Um pouco</label>
+        <label><input type="radio" name="q5" value="2" /> Não</label>
+      </div>
+
+      <button type="button" class="btn" onclick="calcular()">
+        Gerar Diagnóstico
+      </button>
+    </form>
+
+    <!-- RESULTADO -->
+    <div id="resultado" class="resultado" aria-live="polite"></div>
+
+    <!-- DEPOIMENTOS -->
+    <div id="depoimentos" class="depoimentos hidden">
+      <h3>O que donos de negócio dizem</h3>
+
+      <div class="testimonials">
+        <div class="t-card">
+          <p>“Depois do sistema, parei de perder pedido e consegui enxergar o lucro do dia.”</p>
+          <span>— Delivery local</span>
+        </div>
+
+        <div class="t-card">
+          <p>“O estoque deixou de ser dor de cabeça. Hoje eu compro certo e sobra menos.”</p>
+          <span>— Comércio</span>
+        </div>
+
+        <div class="t-card">
+          <p>“O painel mostrou onde eu estava perdendo dinheiro sem perceber.”</p>
+          <span>— Prestador de serviço</span>
+        </div>
+      </div>
+
+      <p class="trust">✅ Diagnóstico gratuito • ✅ Recomendação personalizada • ✅ Sem compromisso</p>
+    </div>
+
+  </section>
+
+  <!-- SEÇÃO METODOLOGIA (SVG PREMIUM) -->
+  <section class="metodologia">
+    <div class="metodo-container">
+
+      <h2>🔎 Como funciona o Diagnóstico</h2>
+
+      <p class="metodo-intro">
+        O diagnóstico analisa pontos essenciais da organização do seu negócio e gera um índice estimado de eficiência operacional.
+      </p>
+
+      <div class="metodo-grid">
+
+        <!-- Card 1 -->
+        <div class="metodo-card">
+          <div class="icon-badge" aria-hidden="true">
+            <!-- SVG: Analytics -->
+            <svg class="metodo-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M4 19V5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M4 19H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M7 16V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M11 16V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M15 16V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M19 16V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h4>Avaliação de Gestão</h4>
+          <p>Analisa controle financeiro, vendas e organização interna.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="metodo-card">
+          <div class="icon-badge" aria-hidden="true">
+            <!-- SVG: Settings/Process -->
+            <svg class="metodo-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M19.4 15a7.9 7.9 0 0 0 .1-1 7.9 7.9 0 0 0-.1-1l2-1.6-2-3.4-2.4 1a8.6 8.6 0 0 0-1.7-1l-.4-2.6H10l-.4 2.6a8.6 8.6 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.9 7.9 0 0 0-.1 1c0 .3 0 .7.1 1l-2 1.6 2 3.4 2.4-1c.5.4 1.1.7 1.7 1l.4 2.6h4.2l.4-2.6c.6-.3 1.2-.6 1.7-1l2.4 1 2-3.4-2-1.6Z"
+                stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h4>Análise Operacional</h4>
+          <p>Identifica falhas em processos e riscos de desorganização.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="metodo-card">
+          <div class="icon-badge" aria-hidden="true">
+            <!-- SVG: Money -->
+            <svg class="metodo-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M4 7h16v10H4V7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M12 14.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M4 9c1.7 0 3-1.3 3-3M20 9c-1.7 0-3-1.3-3-3M4 15c1.7 0 3 1.3 3 3M20 15c-1.7 0-3 1.3-3 3"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h4>Simulação de Impacto</h4>
+          <p>Estima possíveis perdas financeiras com base nas respostas.</p>
+        </div>
+
+      </div>
+
+      <p class="metodo-footer">
+        Este diagnóstico é uma análise estratégica inicial e não substitui auditoria contábil formal.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- JS externo -->
+  <script src="js/script.js"></script>
 </body>
 </html>
-
