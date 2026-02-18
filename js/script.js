@@ -167,3 +167,9 @@ const yearEl = document.getElementById("year");
 if(yearEl){
   yearEl.textContent = new Date().getFullYear();
 }
+
+function fecharCard(){
+  const card = document.getElementById("heroCard");
+  card.classList.add("hide");
+}
+
