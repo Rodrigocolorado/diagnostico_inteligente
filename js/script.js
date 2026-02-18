@@ -1,4 +1,8 @@
-const numero = "5551981757073"; // coloque seu WhatsApp (DDI+DDD+numero)
+const numero = "5551981757073"; // Seu WhatsApp (DDI+DDD+numero)
+
+// ================================
+// BARRA DE PROGRESSO
+// ================================
 
 const radios = document.querySelectorAll("input[type='radio']");
 radios.forEach(r => r.addEventListener("change", atualizarProgresso));
@@ -10,19 +14,20 @@ function atualizarProgresso(){
   document.getElementById("progress").style.width = progresso + "%";
 }
 
+// ================================
+// FORMATAÇÃO EM REAL (R$)
+// ================================
+
 function brl(v){
   v = Number(v) || 0;
   return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 }
 
-let revenueRaw = document.getElementById("monthlyRevenue").value;
-
-let revenue = parseFloat(
-    revenueRaw.replace(/\./g, "").replace(",", ".")
-) || 0;
-
+// Máscara automática no faturamento
+const revenueInput = document.getElementById("monthlyRevenue");
 
 revenueInput.addEventListener("input", function(e) {
+
     let value = e.target.value.replace(/\D/g, "");
 
     if (!value) {
@@ -30,14 +35,16 @@ revenueInput.addEventListener("input", function(e) {
         return;
     }
 
-    value = (parseInt(value, 10) / 100).toFixed(2) + "";
+    value = (parseInt(value, 10) / 100).toFixed(2);
     value = value.replace(".", ",");
-
     value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
     e.target.value = value;
 });
 
+// ================================
+// FUNÇÃO PRINCIPAL
+// ================================
 
 function calcular(){
 
@@ -51,48 +58,42 @@ function calcular(){
   let total = 0;
   respostas.forEach(r => total += parseInt(r.value));
 
-  // 🔥 PEGAR FATURAMENTO FORMATADO
+  // Pegar faturamento formatado corretamente
   let revenueString = document.getElementById("monthlyRevenue").value;
 
   let revenue = parseFloat(
       revenueString.replace(/\./g, "").replace(",", ".")
   ) || 0;
 
-    // Mostrar botão WhatsApp após diagnóstico
-  document.getElementById("whatsappFloat").classList.remove("hidden");
-}
-
-
-  // Receita para simular prejuízo
-  const revenue = Number(document.getElementById("monthlyRevenue").value) || 0;
-
-  // taxa de perda estimada baseada na pontuação (bem conservadora)
-  // organizado -> 1% a 2%
-  // risco -> 3% a 5%
-  // alto risco -> 6% a 9%
+  // Definir nível e taxa de perda
   let plano, nivel, cor, lossRateMin, lossRateMax;
 
   if(total <= 3){
     plano = "Plano Starter";
     nivel = "Negócio Organizado";
     cor = "#16a34a";
-    lossRateMin = 0.01; lossRateMax = 0.02;
+    lossRateMin = 0.01; 
+    lossRateMax = 0.02;
+
   } else if(total <= 6){
     plano = "Plano Profissional";
     nivel = "Negócio em Risco";
     cor = "#facc15";
-    lossRateMin = 0.03; lossRateMax = 0.05;
+    lossRateMin = 0.03; 
+    lossRateMax = 0.05;
+
   } else {
     plano = "Plano Premium";
     nivel = "Alto Risco Operacional";
     cor = "#ef4444";
-    lossRateMin = 0.06; lossRateMax = 0.09;
+    lossRateMin = 0.06; 
+    lossRateMax = 0.09;
   }
 
-  // pontuação visual (0 a 10)
+  // Pontuação visual
   const porcentagem = (total / 10) * 100;
 
-  // prejuízo estimado
+  // Cálculo prejuízo
   const lossMin = revenue * lossRateMin;
   const lossMax = revenue * lossRateMax;
 
@@ -101,9 +102,9 @@ function calcular(){
 
   const textoPerda = revenue > 0
     ? `Estimativa conservadora de perda: <strong>${brl(lossMin)} a ${brl(lossMax)}</strong> por mês`
-    : `Para estimar o prejuízo, informe um faturamento mensal aproximado acima.`;
+    : `Informe um faturamento aproximado para calcular a estimativa de prejuízo.`;
 
-  // Render resultado
+  // Renderizar resultado
   document.getElementById("resultado").innerHTML = `
     <h2>${nivel}</h2>
 
@@ -136,9 +137,16 @@ function calcular(){
     </button>
   `;
 
-  // mostrar depoimentos
+  // Mostrar botão flutuante WhatsApp
+  document.getElementById("whatsappFloat").classList.remove("hidden");
+
+  // Mostrar depoimentos
   document.getElementById("depoimentos").classList.remove("hidden");
 }
+
+// ================================
+// FUNÇÃO WHATSAPP
+// ================================
 
 function whats(plano, lossMin, lossMax){
   const msg = [
@@ -151,5 +159,11 @@ function whats(plano, lossMin, lossMax){
   window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
 }
 
-document.getElementById("year").textContent = new Date().getFullYear();
+// ================================
+// ANO AUTOMÁTICO
+// ================================
 
+const yearEl = document.getElementById("year");
+if(yearEl){
+  yearEl.textContent = new Date().getFullYear();
+}
