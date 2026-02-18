@@ -414,3 +414,10 @@ revenueInput.addEventListener("keyup", function (e) {
   color: #ef4444;
   transform: scale(1.2);
 }
+
+.hero-card.hide {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-20px);
+  transition: 0.4s ease;
+  pointer-events: none;
+}
