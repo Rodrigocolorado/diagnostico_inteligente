@@ -15,6 +15,25 @@ function brl(v){
   return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 }
 
+const revenueInput = document.getElementById("monthlyRevenue");
+
+revenueInput.addEventListener("input", function(e) {
+    let value = e.target.value.replace(/\D/g, "");
+
+    if (!value) {
+        e.target.value = "";
+        return;
+    }
+
+    value = (parseInt(value, 10) / 100).toFixed(2) + "";
+    value = value.replace(".", ",");
+
+    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    e.target.value = value;
+});
+
+
 function calcular(){
   const respostas = document.querySelectorAll("input[type='radio']:checked");
   if(respostas.length < 5){
