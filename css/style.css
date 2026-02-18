@@ -290,3 +290,29 @@ input[type="number"]{
   font-size: 12px;
   color: #475569;
 }
+
+const revenueInput = document.getElementById("monthlyRevenue");
+
+revenueInput.addEventListener("keyup", function (e) {
+
+    let value = e.target.value;
+
+    // Remove tudo que não for número
+    value = value.replace(/\D/g, "");
+
+    if (value.length === 0) {
+        e.target.value = "";
+        return;
+    }
+
+    // Converte para centavos
+    value = (parseInt(value) / 100).toFixed(2);
+
+    // Troca ponto por vírgula
+    value = value.replace(".", ",");
+
+    // Adiciona separador de milhar
+    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    e.target.value = value;
+});
