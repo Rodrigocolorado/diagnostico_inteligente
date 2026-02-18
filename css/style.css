@@ -246,4 +246,15 @@ input[type="number"]{
   line-height:1.5;
 }
 
+.metodo-container {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.metodo-intro {
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+}
+
 
