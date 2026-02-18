@@ -15,7 +15,12 @@ function brl(v){
   return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 }
 
-const revenueInput = document.getElementById("monthlyRevenue");
+let revenueRaw = document.getElementById("monthlyRevenue").value;
+
+let revenue = parseFloat(
+    revenueRaw.replace(/\./g, "").replace(",", ".")
+) || 0;
+
 
 revenueInput.addEventListener("input", function(e) {
     let value = e.target.value.replace(/\D/g, "");
