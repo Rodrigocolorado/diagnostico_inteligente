@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico Inteligente | Rodrigo Systems</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="hero">
+  <h1>Diagnóstico Inteligente para Negócios Locais</h1>
+  <p>Descubra em 60 segundos o nível de organização do seu negócio.</p>
+</header>
+
+<section class="container">
+
+  <div class="progress-bar">
+    <div class="progress" id="progress"></div>
+  </div>
+
+  <!-- Inputs extras para simulação -->
+  <div class="card-mini">
+    <h3>Para estimar o prejuízo (rápido)</h3>
+    <div class="mini-grid">
+      <label>
+        Faturamento médio por mês (R$)
+        <input type="number" id="monthlyRevenue" value="15000" min="0" step="100">
+      </label>
+
+      <label>
+        Dias de operação no mês
+        <input type="number" id="workDays" value="26" min="0" step="1">
+      </label>
+    </div>
+    <p class="mini-note">
+      Se não souber, deixe aproximado (ex: 15000). Isso aumenta a precisão do diagnóstico.
+    </p>
+  </div>
+
+  <form id="quiz">
+
+    <div class="question">
+      <p>1. Você controla vendas manualmente (papel/planilha)?</p>
+      <label><input type="radio" name="q1" value="2"> Sim</label>
+      <label><input type="radio" name="q1" value="0"> Não</label>
+    </div>
+
+    <div class="question">
+      <p>2. Já perdeu dinheiro por erro, retrabalho ou desorganização?</p>
+      <label><input type="radio" name="q2" value="2"> Sim</label>
+      <label><input type="radio" name="q2" value="0"> Não</label>
+    </div>
+
+    <div class="question">
+      <p>3. Você sabe exatamente seu lucro mensal?</p>
+      <label><input type="radio" name="q3" value="0"> Sim</label>
+      <label><input type="radio" name="q3" value="2"> Não</label>
+    </div>
+
+    <div class="question">
+      <p>4. Seu estoque é automatizado?</p>
+      <label><input type="radio" name="q4" value="0"> Sim</label>
+      <label><input type="radio" name="q4" value="2"> Não</label>
+    </div>
+
+    <div class="question">
+      <p>5. Seu negócio está crescendo?</p>
+      <label><input type="radio" name="q5" value="0"> Sim</label>
+      <label><input type="radio" name="q5" value="1"> Um pouco</label>
+      <label><input type="radio" name="q5" value="2"> Não</label>
+    </div>
+
+    <button type="button" onclick="calcular()" class="btn">
+      Gerar Diagnóstico
+    </button>
+  </form>
+
+  <div id="resultado" class="resultado"></div>
+
+  <!-- Depoimentos (aparecem após resultado) -->
+  <div id="depoimentos" class="depoimentos hidden">
+    <h3>O que donos de negócio dizem</h3>
+
+    <div class="testimonials">
+      <div class="t-card">
+        <p>“Depois do sistema, parei de perder pedido e consegui enxergar o lucro do dia.”</p>
+        <span>— Delivery Local</span>
+      </div>
+      <div class="t-card">
+        <p>“O estoque deixou de ser dor de cabeça. Hoje eu compro certo e sobra menos.”</p>
+        <span>— Comércio</span>
+      </div>
+      <div class="t-card">
+        <p>“O painel me mostrou onde eu estava perdendo dinheiro sem perceber.”</p>
+        <span>— Prestador de serviço</span>
+      </div>
+    </div>
+
+    <p class="trust">✅ Diagnóstico gratuito • ✅ Recomendação personalizada • ✅ Sem compromisso</p>
+  </div>
+
+</section>
+
+<script src="js/script.js"></script>
+</body>
+</html>
