@@ -20,6 +20,9 @@ function calcular(){
   if(respostas.length < 5){
     alert("Responda todas as perguntas.");
     return;
+    // Mostrar botão WhatsApp após diagnóstico
+document.getElementById("whatsappFloat").classList.remove("hidden");
+
   }
 
   let total = 0;
