@@ -113,3 +113,5 @@ function whats(plano, lossMin, lossMax){
   window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, "_blank");
 }
 
+document.getElementById("year").textContent = new Date().getFullYear();
+
