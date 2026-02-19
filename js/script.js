@@ -173,3 +173,49 @@ function fecharCard(){
   card.classList.add("hide");
 }
 
+// ===============================
+// CONTADOR INTELIGENTE
+// ===============================
+
+// Número base inicial (você escolhe)
+const baseInicial = 97;
+
+// Recupera contador salvo
+let contadorGlobal = localStorage.getItem("contadorGlobal");
+
+if(!contadorGlobal){
+  contadorGlobal = baseInicial;
+} else {
+  contadorGlobal = parseInt(contadorGlobal);
+}
+
+// Incrementa a cada visita
+contadorGlobal += 1;
+
+// Salva novamente
+localStorage.setItem("contadorGlobal", contadorGlobal);
+
+// ===============================
+// ANIMAÇÃO SUAVE DO NÚMERO
+// ===============================
+
+function animarNumero(final){
+  let atual = 0;
+  const elemento = document.getElementById("visitCount");
+  const incremento = Math.ceil(final / 60);
+
+  const intervalo = setInterval(() => {
+    atual += incremento;
+
+    if(atual >= final){
+      atual = final;
+      clearInterval(intervalo);
+    }
+
+    elemento.textContent = atual;
+  }, 20);
+}
+
+// Executar animação
+animarNumero(contadorGlobal);
+
