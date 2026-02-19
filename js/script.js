@@ -173,36 +173,42 @@ function fecharCard(){
   card.classList.add("hide");
 }
 
-// ===============================
-// CONTADOR INTELIGENTE
-// ===============================
+const baseInicial = 98;
 
-// Número base inicial (você escolhe)
-const baseInicial = 97;
-
-// Recupera contador salvo
 let contadorGlobal = localStorage.getItem("contadorGlobal");
+let ultimaData = localStorage.getItem("ultimaData");
 
+const hoje = new Date().toDateString();
+
+// Se nunca existiu contador
 if(!contadorGlobal){
   contadorGlobal = baseInicial;
+  localStorage.setItem("contadorGlobal", contadorGlobal);
+  localStorage.setItem("ultimaData", hoje);
 } else {
   contadorGlobal = parseInt(contadorGlobal);
+
+  if(ultimaData !== hoje){
+    
+    // Crescimento aleatório entre 8 e 19
+    const crescimento = Math.floor(Math.random() * (19 - 8 + 1)) + 8;
+
+    contadorGlobal += crescimento;
+
+    localStorage.setItem("contadorGlobal", contadorGlobal);
+    localStorage.setItem("ultimaData", hoje);
+  }
 }
 
-// Incrementa a cada visita
-contadorGlobal += 1;
-
-// Salva novamente
-localStorage.setItem("contadorGlobal", contadorGlobal);
-
 // ===============================
-// ANIMAÇÃO SUAVE DO NÚMERO
+// ANIMAÇÃO SUAVE 0 → FINAL
 // ===============================
 
 function animarNumero(final){
   let atual = 0;
   const elemento = document.getElementById("visitCount");
-  const incremento = Math.ceil(final / 60);
+
+  const incremento = Math.ceil(final / 80);
 
   const intervalo = setInterval(() => {
     atual += incremento;
@@ -213,9 +219,8 @@ function animarNumero(final){
     }
 
     elemento.textContent = atual;
-  }, 20);
+  }, 15);
 }
 
-// Executar animação
 animarNumero(contadorGlobal);
 
